@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Moj Projekat 2026</title>
-
 <style>
 body {
     margin: 0;
@@ -58,45 +57,57 @@ button:hover {
 
 <body>
 
-<h1>🚀 Klikni da vidiš šta sam napravio</h1>
+<h1>🚀 Klikni da vidiš moj projekat</h1>
 <button id="trollBtn">POGLEDAJ PROJEKAT</button>
 
 <div id="loading">Učitavanje projekta... 0%</div>
 
 <div id="prankScreen">
-    <img src="slika.jpg">
-    <audio id="prankSound" src="zvuk.mp3"></audio>
+    <img id="prankImage" src="">
+    <audio id="prankSound" src=""></audio>
 </div>
 
 <script>
-let btn = document.getElementById("trollBtn");
-let loading = document.getElementById("loading");
+// Ovde stavi svoje fajlove
+const imageFile = "slika.jpg"; // ime slike
+const audioFile = "zvuk.mp3";  // ime zvuka
 
+// Referencije
+const btn = document.getElementById("trollBtn");
+const loading = document.getElementById("loading");
+const prankScreen = document.getElementById("prankScreen");
+const prankImage = document.getElementById("prankImage");
+const prankSound = document.getElementById("prankSound");
+
+// Dugme
 btn.addEventListener("click", function() {
-
     btn.style.display = "none";
     loading.style.display = "block";
 
     let percent = 0;
-    let interval = setInterval(function() {
+    const interval = setInterval(() => {
         percent += 5;
         loading.innerText = "Učitavanje projekta... " + percent + "%";
-
         if (percent >= 100) {
             clearInterval(interval);
             startPrank();
         }
     }, 100);
-
 });
 
+// Funkcija za prank
 function startPrank() {
     document.body.innerHTML = "";
-    let prank = document.getElementById("prankScreen");
-    prank.style.display = "block";
+    prankScreen.style.display = "block";
+    prankImage.src = imageFile;
+    prankSound.src = audioFile;
 
-    let sound = document.getElementById("prankSound");
-    sound.play();
+    // Auto play zvuk
+    prankSound.play().catch(() => {
+        // Ako browser blokira autoplay
+        alert("Klikni da pustiš zvuk!");
+        prankSound.play();
+    });
 }
 </script>
 
