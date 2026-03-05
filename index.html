@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<title>Moj Projekat 2026</title>
+
+<style>
+body {
+    margin: 0;
+    background: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+button {
+    padding: 20px 40px;
+    font-size: 22px;
+    border: none;
+    border-radius: 12px;
+    background: lime;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+#loading {
+    display: none;
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+#prankScreen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+}
+
+#prankScreen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚀 Klikni da vidiš šta sam napravio</h1>
+<button id="trollBtn">POGLEDAJ PROJEKAT</button>
+
+<div id="loading">Učitavanje projekta... 0%</div>
+
+<div id="prankScreen">
+    <img src="slika.jpg">
+    <audio id="prankSound" src="zvuk.mp3"></audio>
+</div>
+
+<script>
+let btn = document.getElementById("trollBtn");
+let loading = document.getElementById("loading");
+
+btn.addEventListener("click", function() {
+
+    btn.style.display = "none";
+    loading.style.display = "block";
+
+    let percent = 0;
+    let interval = setInterval(function() {
+        percent += 5;
+        loading.innerText = "Učitavanje projekta... " + percent + "%";
+
+        if (percent >= 100) {
+            clearInterval(interval);
+            startPrank();
+        }
+    }, 100);
+
+});
+
+function startPrank() {
+    document.body.innerHTML = "";
+    let prank = document.getElementById("prankScreen");
+    prank.style.display = "block";
+
+    let sound = document.getElementById("prankSound");
+    sound.play();
+}
+</script>
+
+</body>
+</html>
